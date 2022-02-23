@@ -24,6 +24,7 @@ function Login() {
     } catch (error) {
       setEmail("");
       setPassword("");
+      dispatch(modalControl(true,'아이디나 비밀번호가 존재하지 않거나 틀렸습니다.'))
     }
   };
 
