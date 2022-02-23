@@ -1,13 +1,19 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import {
+  notAvailableModal,
+  sucessSignup,
+} from "../redux/actions/modalAction";
 
 function SignUp() {
   const [email, setId] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
@@ -16,15 +22,22 @@ function SignUp() {
         email,
         password
       );
-      alert ('계정 가입에 성공하셨습니다. 로그인 해주세요')
-      //   dispatch(newSignUp({ id, password }));
-      //   alert("success created sign up");
-      //   console.log(createSignUp.user, "user signuped");
-      //   setId("");
-      //   setPassword("");
+      dispatch(
+        sucessSignup(
+          true,
+          "계정이 가입되었습니다. 생성한 계정으로 로그인해주세요 🙇"
+        )
+      );
+      setId("");
+      setPassword("");
     } catch (error) {
-      console.log(error, "error");
-      alert(error);
+    
+      dispatch(
+        notAvailableModal(
+          true,
+          "아이디 형식이나 비밀번호 최소 숫자가 입력이 되지 않았습니다. 다시 입력해주세요"
+        )
+      );
     }
   };
 

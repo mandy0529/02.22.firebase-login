@@ -1,11 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { closeModal } from "../redux/actions/modalAction";
 
-function Modal() {
+function Modal({ msg }) {
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    dispatch(closeModal());
+  };
+  
   return (
     <Wrapper>
-      <span>modal</span>
-      <button>확인</button>
+      <span>{msg}</span>
+      <button onClick={handleClose}>확인</button>
     </Wrapper>
   );
 }
@@ -37,14 +45,14 @@ const Wrapper = styled.div`
     font-weight: bold;
     color: black;
     margin-top: 15rem;
-    padding:0.5rem 1.5rem;
-    background:gold;
-    border-radius:10px;
-    cursor:pointer;
-    transition:all 0.3s linear;
+    padding: 0.5rem 1.5rem;
+    background: gold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s linear;
     &:hover {
-        background:tomato;
-        color:white;
+      background: tomato;
+      color: white;
     }
   }
 `;

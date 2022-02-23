@@ -6,9 +6,8 @@ import Login from "./Login";
 function User() {
   const { userName } = useSelector((state) => state.user);
 
-
-
-  return <div>{userName !== "" ? <Home /> : <Login />}</div>;
+  console.log(userName, "user name");
+  return <div>{userName === ""||userName===undefined  ? <Login />:<Home />}</div>;
 }
 
 export default User;

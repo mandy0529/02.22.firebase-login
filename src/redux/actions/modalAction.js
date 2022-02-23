@@ -1,20 +1,52 @@
 import { ActionTypes } from "../constant/action";
 
-const {HAS_USER_MODAL,NOT_AVAILABLE_MODAL,SUCCESS_SIGNUP_MODAL,SUCCESS_LOGIN_MODAL,FAIL_LOGIN_MODAL}=ActionTypes;
+const {
+  CLOSE_MODAL,
+  HAS_USER_MODAL,
+  NOT_AVAILABLE_MODAL,
+  SUCCESS_SIGNUP_MODAL,
+  SUCCESS_LOGIN_MODAL,
+  FAIL_LOGIN_MODAL,
+  LOGOUT,
+} = ActionTypes;
 
-const sucessSignup=()=>{
-    return {
-        type:SUCCESS_SIGNUP_MODAL
-    }
-}
+export const sucessSignup = (show, msg) => {
+  return {
+    type: SUCCESS_SIGNUP_MODAL,
+    payload: { show, msg },
+  };
+};
 
-const hasUserModal=()=>{};
+export const notAvailableModal = (show, msg) => {
+  return {
+    type: NOT_AVAILABLE_MODAL,
+    payload: { show, msg },
+  };
+};
 
-const notAvailableModal=()=>{};
+export const sucessLogin = (show, msg) => {
+  return {
+    type: SUCCESS_LOGIN_MODAL,
+    payload: { show, msg },
+  };
+};
 
-const sucessLogin=()=>{}
+export const failLogin = (show, msg) => {
+  return {
+    type: FAIL_LOGIN_MODAL,
+    payload: { show, msg },
+  };
+};
 
-const failLogin=()=>{}
-const controlMsg=()=>{
+export const closeModal = () => {
+  return {
+    type: CLOSE_MODAL,
+  };
+};
 
-}
+export const logOut = (show, msg) => {
+  return {
+    type: LOGOUT,
+    payload: { show, msg },
+  };
+};

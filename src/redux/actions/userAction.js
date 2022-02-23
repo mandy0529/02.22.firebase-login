@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constant/action";
-const { LOGIN, LOGOUT, SIGN_UP } = ActionTypes;
+const { LOGIN, LOGOUT, SIGN_UP, SET_LOGOUT } = ActionTypes;
 
 export const newSignUp = (email) => {
   return {
@@ -8,9 +8,15 @@ export const newSignUp = (email) => {
   };
 };
 
-export const setLogin=(user)=>{
-    return {
-        type:LOGIN,
-        payload:user
-    }
-}
+export const setLogin = (user) => {
+  return {
+    type: LOGIN,
+    payload: user,
+  };
+};
+
+export const setLogout = () => {
+  return {
+    type: SET_LOGOUT,
+  };
+};

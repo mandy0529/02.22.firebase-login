@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import { failLogin, sucessLogin } from "../redux/actions/modalAction";
 import { setLogin } from "../redux/actions/userAction";
 
 function Login() {
@@ -16,11 +17,16 @@ function Login() {
     e.preventDefault();
     try {
       const login = await signInWithEmailAndPassword(auth, email, password);
+      dispatch(setLogin(login.user.email));
+      dispatch(sucessLogin(true, "로그인 되었습니다 🙍"));
       setEmail("");
       setPassword("");
-      dispatch(setLogin(login.user.email));
     } catch (error) {
-      alert(error);
+      dispatch(
+        failLogin(true, "아이디나 비밀번호가 존재하지않거나 틀렸습니다. 다시 입력해주세요 ❌")
+      );
+      setEmail("");
+      setPassword("");
     }
   };
 
