@@ -4,10 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import {
-  notAvailableModal,
-  sucessSignup,
-} from "../redux/actions/modalAction";
+import { modalControl } from "../redux/actions/modalAction";
 
 function SignUp() {
   const [email, setId] = useState("");
@@ -17,23 +14,18 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const createSignUp = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
+      setId("");
+      setPassword("");
       dispatch(
-        sucessSignup(
+        modalControl(
           true,
           "계정이 가입되었습니다. 생성한 계정으로 로그인해주세요 🙇"
         )
       );
-      setId("");
-      setPassword("");
     } catch (error) {
-    
       dispatch(
-        notAvailableModal(
+        modalControl(
           true,
           "아이디 형식이나 비밀번호 최소 숫자가 입력이 되지 않았습니다. 다시 입력해주세요"
         )
@@ -71,6 +63,7 @@ function SignUp() {
         </div>
         <input className="submit-btn" type="submit" value="sign-up" />
       </form>
+      <span>계정이 이미 있으신가요 ? </span>
       <Link to="/">go to login</Link>
     </Wrapper>
   );
@@ -121,6 +114,10 @@ const Wrapper = styled.div`
       color: blue;
       transform: scale(0.98);
     }
+  }
+  span {
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 `;
 

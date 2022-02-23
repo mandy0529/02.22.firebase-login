@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constant/action";
-const { LOGIN, LOGOUT, SIGN_UP, SET_LOGOUT } = ActionTypes;
+const { LOGIN, SIGN_UP, SET_LOGOUT } = ActionTypes;
 
 export const newSignUp = (email) => {
   return {

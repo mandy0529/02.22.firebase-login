@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import { logOut } from "../redux/actions/modalAction";
+import { modalControl } from "../redux/actions/modalAction";
 import { setLogout } from "../redux/actions/userAction";
 
 function Home() {
@@ -12,9 +12,8 @@ function Home() {
 
   const handleLogOut = async () => {
     try {
-      const user = await signOut(auth);
-      console.log(user, "user");
-      dispatch(logOut(true, "로그아웃 되었습니다."));
+      await signOut(auth);
+      dispatch(modalControl(true, "로그아웃 되었습니다."));
       dispatch(setLogout());
     } catch (error) {
       console.log(error);

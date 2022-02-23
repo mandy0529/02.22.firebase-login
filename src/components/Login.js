@@ -1,10 +1,10 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import { failLogin, sucessLogin } from "../redux/actions/modalAction";
+import { modalControl } from "../redux/actions/modalAction";
 import { setLogin } from "../redux/actions/userAction";
 
 function Login() {
@@ -18,13 +18,10 @@ function Login() {
     try {
       const login = await signInWithEmailAndPassword(auth, email, password);
       dispatch(setLogin(login.user.email));
-      dispatch(sucessLogin(true, "로그인 되었습니다 🙍"));
+      dispatch(modalControl(true, "로그인 되었습니다 🙍"));
       setEmail("");
       setPassword("");
     } catch (error) {
-      dispatch(
-        failLogin(true, "아이디나 비밀번호가 존재하지않거나 틀렸습니다. 다시 입력해주세요 ❌")
-      );
       setEmail("");
       setPassword("");
     }
@@ -33,7 +30,7 @@ function Login() {
   return (
     <Wrapper>
       <h1>Log in</h1>
-      <form onSubmit={handleLogin}>
+      <form data-type="" onSubmit={handleLogin}>
         <div>
           <div>
             <label htmlFor="id">Id : </label>
@@ -62,7 +59,7 @@ function Login() {
         <input className="submit-btn" type="submit" value="login" />
       </form>
       <div className="bottom">
-        <span>계정이 없으신가요 ? </span>
+        <span>계정이 아직 없으신가요 ? </span>
         <Link to="/sign-up">sign up</Link>
       </div>
     </Wrapper>

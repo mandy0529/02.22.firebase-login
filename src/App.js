@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
 import Login from "./components/Login";
 import Modal from "./components/Modal";
 import SignUp from "./components/SignUp";
